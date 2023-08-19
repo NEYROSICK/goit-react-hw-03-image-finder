@@ -1,8 +1,6 @@
 import styled from '@emotion/styled';
 
 export const Backdrop = styled.div`
-  visibility: ${props =>
-    props.isModalVisible === true ? 'visible' : 'hidden'};
   position: fixed;
   top: 0;
   display: flex;

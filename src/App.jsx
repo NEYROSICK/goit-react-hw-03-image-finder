@@ -15,15 +15,12 @@ class App extends Component {
   };
 
   onImageClick = (url, descr) => {
-    // console.log(args);
     this.setState({ isModalVisible: true, imageObj: { url, descr } });
-    document.addEventListener('keydown', this.onEscClose);
   };
 
   onEscClose = e => {
     if (e.key === 'Escape') {
       this.setState({ isModalVisible: false, imageObj: {} });
-      document.removeEventListener('keydown', this.onEscClose);
     }
   };
 
@@ -40,12 +37,13 @@ class App extends Component {
       <>
         <Searchbar onSubmit={this.onSubmit} />
         <ImageGallery query={query} onImageClick={this.onImageClick} />
-        {Object.keys(imageObj).length ? (
+        {this.state.isModalVisible ? (
           <Modal
             imageURL={imageObj.url}
             descr={imageObj.descr}
             handleClick={this.onBackdropClick}
             isModalVisible={isModalVisible}
+            onEscClose={this.onEscClose}
           />
         ) : null}
       </>
